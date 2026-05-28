@@ -22,3 +22,34 @@
   align-items: center;
   gap: 10px;
 }
+
+body {
+  background: #f5f6fa;
+  font-family: sans-serif;
+}
+
+.container {
+  display: flex;
+}
+
+.content {
+  flex: 1;
+  padding: 30px;
+}
+
+.dashboard {
+  display: flex;
+  gap: 20px;
+}
+
+.left {
+  flex: 2;
+}
+
+.right {
+  flex: 1;
+}
+
+.header {
+  margin-bottom: 30px;
+}

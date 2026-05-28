@@ -1,8 +1,10 @@
 export default function Header() {
   return (
-    <header>
-      <h1>Agenda Acadêmica</h1>
-      <p>Organize seus estudos</p>
+    <header className="header">
+      <div>
+        <h1>Agenda Acadêmica</h1>
+        <p>Organize seus estudos e atividades</p>
+      </div>
     </header>
   )
 }

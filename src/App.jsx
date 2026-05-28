@@ -7,13 +7,30 @@ import AddTask from './components/AddTask'
 
 function App() {
   return (
-    <div>
+    <div className="container">
+
       <Sidebar />
-      <Header />
-      <TaskList />
-      <CalendarBox />
-      <AddTask />
-      <StatsCards />
+
+      <main className="content">
+
+        <Header />
+
+        <div className="dashboard">
+
+          <div className="left">
+            <TaskList />
+            <AddTask />
+            <StatsCards />
+          </div>
+
+          <div className="right">
+            <CalendarBox />
+          </div>
+
+        </div>
+
+      </main>
+
     </div>
   )
 }
