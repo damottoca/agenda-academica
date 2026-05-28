@@ -87,3 +87,15 @@ button {
   color: white;
   border: none;
 }
+
+.stats {
+  display: flex;
+  gap: 20px;
+}
+
+.stat-card {
+  background: white;
+  flex: 1;
+  padding: 20px;
+  border-radius: 12px;
+}
