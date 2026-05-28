@@ -1,4 +1,21 @@
-export default function AddTask() {
+import { useState } from 'react'
+
+export default function AddTask({
+  adicionarTarefa
+}) {
+
+  const [titulo, setTitulo] = useState('')
+  const [prioridade, setPrioridade] = useState('Alta')
+
+  function enviar() {
+
+    if (!titulo) return
+
+    adicionarTarefa(titulo, prioridade)
+
+    setTitulo('')
+  }
+
   return (
     <div className="card">
 
@@ -9,16 +26,26 @@ export default function AddTask() {
         <input
           type="text"
           placeholder="Digite a atividade..."
+          value={titulo}
+          onChange={(e) =>
+            setTitulo(e.target.value)
+          }
         />
 
-        <select>
-          <option>Prioridade</option>
+        <select
+          value={prioridade}
+          onChange={(e) =>
+            setPrioridade(e.target.value)
+          }
+        >
           <option>Alta</option>
           <option>Média</option>
           <option>Baixa</option>
         </select>
 
-        <button>Adicionar</button>
+        <button onClick={enviar}>
+          Adicionar
+        </button>
 
       </div>
 

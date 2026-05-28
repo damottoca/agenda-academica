@@ -1,38 +1,51 @@
-export default function TaskList() {
+import { FaTrash } from 'react-icons/fa'
 
-  const tarefas = [
-    {
-      titulo: 'Estudar JavaScript',
-      descricao: 'Manipulação do DOM',
-      prioridade: 'Alta',
-      data: '20/05/2026'
-    },
-
-    {
-      titulo: 'Trabalho DevOps',
-      descricao: 'Apresentação do projeto',
-      prioridade: 'Média',
-      data: '28/05/2026'
-    }
-  ]
+export default function TaskList({
+  tarefas,
+  removerTarefa,
+  concluirTarefa
+}) {
 
   return (
     <div className="card">
 
       <h2>Minhas Tarefas</h2>
 
-      {tarefas.map((tarefa, index) => (
+      {tarefas.map(tarefa => (
 
-        <div className="task" key={index}>
+        <div className="task" key={tarefa.id}>
 
           <div>
-            <h3>{tarefa.titulo}</h3>
-            <p>{tarefa.descricao}</p>
+
+            <h3
+              style={{
+                textDecoration:
+                  tarefa.concluida
+                    ? 'line-through'
+                    : 'none'
+              }}
+            >
+              {tarefa.titulo}
+            </h3>
+
+            <p>{tarefa.prioridade}</p>
+
           </div>
 
-          <div>
-            <span>{tarefa.prioridade}</span>
-            <p>{tarefa.data}</p>
+          <div className="task-buttons">
+
+            <button
+              onClick={() => concluirTarefa(tarefa.id)}
+            >
+              ✓
+            </button>
+
+            <button
+              onClick={() => removerTarefa(tarefa.id)}
+            >
+              <FaTrash />
+            </button>
+
           </div>
 
         </div>
