@@ -23,7 +23,31 @@ function App() {
 
     return salvas
       ? JSON.parse(salvas)
-      : []
+      : [
+          {
+            id: 1,
+            titulo: 'Estudar JavaScript',
+            prioridade: 'Alta',
+            data: '2026-05-20',
+            concluida: false
+          },
+
+          {
+            id: 2,
+            titulo: 'Trabalho DevOps',
+            prioridade: 'Média',
+            data: '2026-05-25',
+            concluida: false
+          },
+
+          {
+            id: 3,
+            titulo: 'Prova Banco de Dados',
+            prioridade: 'Alta',
+            data: '2026-05-30',
+            concluida: true
+          }
+        ]
   })
 
   useEffect(() => {
@@ -37,13 +61,15 @@ function App() {
 
   function adicionarTarefa(
     titulo,
-    prioridade
+    prioridade,
+    data
   ) {
 
     const nova = {
       id: Date.now(),
       titulo,
       prioridade,
+      data,
       concluida: false
     }
 
@@ -132,3 +158,5 @@ function App() {
 }
 
 export default App
+
+
