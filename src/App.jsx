@@ -1,42 +1,29 @@
 import { useState, useEffect } from 'react'
 
+import {
+  Routes,
+  Route
+} from 'react-router-dom'
+
 import Sidebar from './components/Sidebar'
 import Header from './components/Header'
-import TaskList from './components/TaskList'
-import CalendarBox from './components/CalendarBox'
-import StatsCards from './components/StatsCards'
-import AddTask from './components/AddTask'
+
+import Tasks from './pages/Tasks'
+import Subjects from './pages/Subjects'
+import CalendarPage from './pages/CalendarPage'
+import Summary from './pages/Summary'
+import Settings from './pages/Settings'
 
 function App() {
 
   const [tarefas, setTarefas] = useState(() => {
 
-    const salvas = localStorage.getItem('tarefas')
+    const salvas =
+      localStorage.getItem('tarefas')
 
     return salvas
       ? JSON.parse(salvas)
-      : [
-          {
-            id: 1,
-            titulo: 'Estudar JavaScript',
-            prioridade: 'Alta',
-            concluida: false
-          },
-
-          {
-            id: 2,
-            titulo: 'Trabalho de DevOps',
-            prioridade: 'Média',
-            concluida: false
-          },
-
-          {
-            id: 3,
-            titulo: 'Prova de Banco de Dados',
-            prioridade: 'Alta',
-            concluida: true
-          }
-        ]
+      : []
   })
 
   useEffect(() => {
@@ -48,7 +35,10 @@ function App() {
 
   }, [tarefas])
 
-  function adicionarTarefa(titulo, prioridade) {
+  function adicionarTarefa(
+    titulo,
+    prioridade
+  ) {
 
     const nova = {
       id: Date.now(),
@@ -57,13 +47,18 @@ function App() {
       concluida: false
     }
 
-    setTarefas([...tarefas, nova])
+    setTarefas([
+      ...tarefas,
+      nova
+    ])
   }
 
   function removerTarefa(id) {
 
     setTarefas(
-      tarefas.filter(t => t.id !== id)
+      tarefas.filter(
+        t => t.id !== id
+      )
     )
   }
 
@@ -71,6 +66,7 @@ function App() {
 
     setTarefas(
       tarefas.map(t =>
+
         t.id === id
           ? {
               ...t,
@@ -82,6 +78,7 @@ function App() {
   }
 
   return (
+
     <div className="container">
 
       <Sidebar />
@@ -90,31 +87,43 @@ function App() {
 
         <Header />
 
-        <div className="dashboard">
+        <Routes>
 
-          <div className="left">
+          <Route
+            path="/"
+            element={
+              <Tasks
+                tarefas={tarefas}
+                adicionarTarefa={adicionarTarefa}
+                removerTarefa={removerTarefa}
+                concluirTarefa={concluirTarefa}
+              />
+            }
+          />
 
-            <TaskList
-              tarefas={tarefas}
-              removerTarefa={removerTarefa}
-              concluirTarefa={concluirTarefa}
-            />
+          <Route
+            path="/materias"
+            element={<Subjects />}
+          />
 
-            <AddTask
-              adicionarTarefa={adicionarTarefa}
-            />
+          <Route
+            path="/calendario"
+            element={<CalendarPage />}
+          />
 
-            <StatsCards tarefas={tarefas} />
+          <Route
+            path="/resumo"
+            element={
+              <Summary tarefas={tarefas} />
+            }
+          />
 
-          </div>
+          <Route
+            path="/configuracoes"
+            element={<Settings />}
+          />
 
-          <div className="right">
-
-            <CalendarBox />
-
-          </div>
-
-        </div>
+        </Routes>
 
       </main>
 
