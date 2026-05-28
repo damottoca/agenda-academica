@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import Sidebar from './components/Sidebar'
 import Header from './components/Header'
@@ -9,14 +9,44 @@ import AddTask from './components/AddTask'
 
 function App() {
 
-  const [tarefas, setTarefas] = useState([
-    {
-      id: 1,
-      titulo: 'Estudar JavaScript',
-      prioridade: 'Alta',
-      concluida: false
-    }
-  ])
+  const [tarefas, setTarefas] = useState(() => {
+
+    const salvas = localStorage.getItem('tarefas')
+
+    return salvas
+      ? JSON.parse(salvas)
+      : [
+          {
+            id: 1,
+            titulo: 'Estudar JavaScript',
+            prioridade: 'Alta',
+            concluida: false
+          },
+
+          {
+            id: 2,
+            titulo: 'Trabalho de DevOps',
+            prioridade: 'Média',
+            concluida: false
+          },
+
+          {
+            id: 3,
+            titulo: 'Prova de Banco de Dados',
+            prioridade: 'Alta',
+            concluida: true
+          }
+        ]
+  })
+
+  useEffect(() => {
+
+    localStorage.setItem(
+      'tarefas',
+      JSON.stringify(tarefas)
+    )
+
+  }, [tarefas])
 
   function adicionarTarefa(titulo, prioridade) {
 
@@ -31,7 +61,10 @@ function App() {
   }
 
   function removerTarefa(id) {
-    setTarefas(tarefas.filter(t => t.id !== id))
+
+    setTarefas(
+      tarefas.filter(t => t.id !== id)
+    )
   }
 
   function concluirTarefa(id) {
@@ -39,7 +72,10 @@ function App() {
     setTarefas(
       tarefas.map(t =>
         t.id === id
-          ? { ...t, concluida: !t.concluida }
+          ? {
+              ...t,
+              concluida: !t.concluida
+            }
           : t
       )
     )
@@ -64,14 +100,18 @@ function App() {
               concluirTarefa={concluirTarefa}
             />
 
-            <AddTask adicionarTarefa={adicionarTarefa} />
+            <AddTask
+              adicionarTarefa={adicionarTarefa}
+            />
 
             <StatsCards tarefas={tarefas} />
 
           </div>
 
           <div className="right">
+
             <CalendarBox />
+
           </div>
 
         </div>
