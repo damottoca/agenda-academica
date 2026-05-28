@@ -67,3 +67,23 @@ body {
   padding: 20px 0;
   border-bottom: 1px solid #ddd;
 }
+
+.form {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+input,
+select,
+button {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+button {
+  background: #5b4bff;
+  color: white;
+  border: none;
+}
