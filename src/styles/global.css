@@ -99,3 +99,19 @@ button {
   padding: 20px;
   border-radius: 12px;
 }
+
+@media (max-width: 900px) {
+
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .stats {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+}
